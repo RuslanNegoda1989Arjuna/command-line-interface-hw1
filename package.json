@@ -1,0 +1,22 @@
+{
+  "name": "command-line-interface-hw1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RuslanNegoda1989Arjuna/command-line-interface-hw1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RuslanNegoda1989Arjuna/command-line-interface-hw1/issues"
+  },
+  "homepage": "https://github.com/RuslanNegoda1989Arjuna/command-line-interface-hw1#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
