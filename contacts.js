@@ -23,20 +23,17 @@ async function listContacts() {
   console.table(contacts);
   return contacts;
 }
-// console.log(listContacts());
+console.log(listContacts());
 
 async function getContactById(contactId) {
-  try {
-    const data = await fs.readFile("contactsPath", "utf-8");
-    const contacts = JSON.parse(data);
-    return contacts;
-  } catch (error) {
-    console.error(error);
-  }
+  const contacts = await readDb();
+  const contact = contacts.find((contact) => contactId == contact.id);
+  console.table(contact);
 }
+console.log(getContactById(1));
 
 async function removeContact(contactId) {
-  // ...твій код
+  const contacts = await readDb();
 }
 
 async function addContact(name, email, phone) {
