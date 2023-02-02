@@ -15,14 +15,20 @@ async function listContacts() {
   }
 }
 
-function getContactById(contactId) {
+async function getContactById(contactId) {
+  try {
+    const data = await fs.readFile("contactsPath", "utf-8");
+    const contacts = JSON.parse(data);
+    return contacts;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+async function removeContact(contactId) {
   // ...твій код
 }
 
-function removeContact(contactId) {
-  // ...твій код
-}
-
-function addContact(name, email, phone) {
+async function addContact(name, email, phone) {
   // ...твій код
 }
