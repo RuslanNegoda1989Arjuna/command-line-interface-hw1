@@ -2,18 +2,28 @@ const path = require("path");
 const fs = require("fs").promises;
 
 const contactsPath = path.resolve("./db/contacts.json");
-console.log(contactsPath);
 
-// TODO: задокументувати кожну функцію
-async function listContacts() {
+async function readDb() {
   try {
-    const data = await fs.readFile("contactsPath", "utf-8");
-    const contacts = JSON.parse(data);
-    return contacts;
+    const data = await fs.readFile(contactsPath, "utf-8");
+    const readContacts = JSON.parse(data);
+    return readContacts;
   } catch (error) {
     console.error(error);
   }
 }
+
+async function wrightDb(db) {
+  await fs.writeFile(contactsPath, JSON.stringify(db, null, -2));
+}
+
+// TODO: задокументувати кожну функцію
+async function listContacts() {
+  const contacts = await readDb();
+  console.table(contacts);
+  return contacts;
+}
+// console.log(listContacts());
 
 async function getContactById(contactId) {
   try {
