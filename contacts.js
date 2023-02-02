@@ -1,5 +1,6 @@
 const path = require("path");
 const fs = require("fs").promises;
+// const { nanoid } = require("nanoid");
 
 const contactsPath = path.resolve("./db/contacts.json");
 
@@ -19,7 +20,6 @@ async function listContacts() {
   }
 }
 // console.log(listContacts());
-// listContacts();
 
 async function getContactById(contactId) {
   const contacts = await listContacts();
@@ -29,22 +29,24 @@ async function getContactById(contactId) {
   if (!contactById) {
     return `Not found this id: ${contactId}`;
   }
-  console.table(contactById);
-  return contactById;
+  console.log(contactById);
 }
-// console.log(getContactById(1));
 
 async function removeContact(contactId) {
   const contacts = await listContacts();
+  const findId = contacts.find((contact) => contact.id === String(contactId));
+  if (!findId) {
+    console.log(`Not found this id: ${contactId}`);
+    return;
+  }
   const updateContacts = contacts.filter(
     (contact) => Number(contact.id) !== contactId
   );
-  if (!updateContacts) {
-    return `Not found this id: ${contactId}`;
-  }
-  console.table(updateContacts);
+
+  await wrightDb(updateContacts);
+  console.log(`Id: ${contactId} was deleted`);
 }
-console.log(removeContact(1));
+console.log(removeContact(2));
 
 async function addContact(name, email, phone) {
   // ...твій код
