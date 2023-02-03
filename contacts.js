@@ -1,6 +1,6 @@
 const path = require("path");
 const fs = require("fs").promises;
-// const { nanoid } = require("nanoid");
+const { v4 } = require("uuid");
 
 const contactsPath = path.resolve("./db/contacts.json");
 
@@ -49,5 +49,17 @@ async function removeContact(contactId) {
 console.log(removeContact(2));
 
 async function addContact(name, email, phone) {
-  // ...твій код
+  const contact = { id: v4(), name, email, phone };
+  const contacts = await listContacts();
+  contacts.push(contact);
+
+  await wrightDb(contacts);
+  console.log(`${name} was added`);
 }
+
+module.exports = {
+  listContacts,
+  getContactById,
+  removeContact,
+  addContact,
+};
