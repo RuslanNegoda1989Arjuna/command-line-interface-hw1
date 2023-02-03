@@ -13,23 +13,20 @@ async function listContacts() {
   try {
     const data = await fs.readFile(contactsPath, "utf-8");
     const contacts = JSON.parse(data);
-    console.table(contacts);
+    // console.table(contacts);
     return contacts;
   } catch (error) {
     console.error(error);
   }
 }
-// console.log(listContacts());
 
 async function getContactById(contactId) {
   const contacts = await listContacts();
-  const contactById = contacts.find(
-    (contact) => contactId === Number(contact.id)
-  );
+  const contactById = contacts.find((contact) => contactId == contact.id);
   if (!contactById) {
-    return `Not found this id: ${contactId}`;
+    return console.log(`Not found this id: ${contactId}`);
   }
-  console.log(contactById);
+  return console.log(contactById);
 }
 
 async function removeContact(contactId) {
@@ -46,7 +43,6 @@ async function removeContact(contactId) {
   await wrightDb(updateContacts);
   console.log(`Id: ${contactId} was deleted`);
 }
-console.log(removeContact(2));
 
 async function addContact(name, email, phone) {
   const contact = { id: v4(), name, email, phone };
